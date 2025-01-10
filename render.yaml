@@ -6,25 +6,17 @@ services:
     startCommand: gunicorn main:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: FLASK_APP
-        value: main.py
-      - key: FLASK_ENV
-        value: production
+        value: 3.11.11
       - key: SECRET_KEY
-        value: your-super-secret-key-123
-      - key: MAIL_USERNAME
-        value: bishalgogoi09735@gmail.com
-      - key: MAIL_PASSWORD
-        sync: false
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
       - key: DATABASE_URL
-        fromService:
-          type: mysql
-          name: attendance-db
+        fromDatabase:
+          name: attendance-system-db
           property: connectionString
 
-  - type: mysql
-    name: attendance-db
-    ipAllowList: []
+databases:
+  - name: attendance-system-db
     plan: free
-    version: "8.0.23"
+    ipAllowList: []
