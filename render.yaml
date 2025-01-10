@@ -11,3 +11,20 @@ services:
         value: main.py
       - key: FLASK_ENV
         value: production
+      - key: SECRET_KEY
+        value: your-super-secret-key-123
+      - key: MAIL_USERNAME
+        value: bishalgogoi09735@gmail.com
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: DATABASE_URL
+        fromService:
+          type: mysql
+          name: attendance-db
+          property: connectionString
+
+  - type: mysql
+    name: attendance-db
+    ipAllowList: []
+    plan: free
+    version: "8.0.23"
